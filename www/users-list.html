@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!-- ... metas and styles ... -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <!-- Color theme for statusbar -->
+        <meta name="theme-color" content="#2196f3">
+        <!-- Your app title -->
+        <title>KickUser</title>
+        <!-- Path to Framework7 Library CSS -->
+        <link rel="stylesheet" href="css/libs/framework7.min.css">
+        <link rel="stylesheet" href="css/libs/framework7-icons.css">
+        <!-- Path to your custom app styles-->
+    </head>
+
+    <body>
+        <!-- App Root Element -->
+        <div id="app">
+
+            <!-- Status bar overlay for full screen mode (Cordova or PhoneGap) -->
+            <f7-statusbar></f7-statusbar>
+
+            <!-- Main view-->
+            <f7-view main>
+
+                <f7-page>
+
+                    <!-- Page content must have additional "ptr-content" class -->
+                    <div class="page-content ptr-content" data-ptr-distance="55">
+                        <!-- Default pull to refresh preloader-->
+                        <div class="ptr-preloader">
+                            <div class="preloader"></div>
+                            <div class="ptr-arrow"></div>
+                        </div>
+
+
+                        <f7-navbar title="Users List"></f7-navbar>
+
+                        <!-- Page content -->
+                        <f7-block>
+                            <p>Currently connected users.</p>
+                        </f7-block>
+
+                        <f7-list>
+                            <f7-list-item swipeout badge v-for="(user, key) in users_list" @swipeout:deleted="onSwipeoutDeleted(user)">
+                                <div slot="title">
+                                    <i class="f7-icons">person</i>
+                                    <span>{{user}}</span>
+                                </div>
+                                <f7-swipeout-actions>
+                                    <f7-swipeout-button delete>Delete</f7-swipeout-button>
+                                </f7-swipeout-actions>
+                            </f7-list-item>
+                        </f7-list>
+
+                    </div>
+                    <!-- /.ptr-content -->
+
+                </f7-page>
+
+            </f7-view>
+
+        </div>
+        <!-- /#app -->
+
+        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+        <!-- Path to Vue js -->
+        <script type="text/javascript" src="js/libs/vue.js"></script>
+        <!-- Path to Framework7 Library JS-->
+        <script type="text/javascript" src="js/libs/framework7.min.js"></script>
+        <!-- Path to Framework7 Vue Plugin -->
+        <script type="text/javascript" src="js/libs/framework7-vue.min.js"></script>
+
+        <!-- Path to your app js where you init your app-->
+        <script type="text/javascript" src="js/users-list.js"></script>
+
+    </body>
+
+</html>

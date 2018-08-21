@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- ... metas and styles ... -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Color theme for statusbar -->
+    <meta name="theme-color" content="#2196f3">
+    <!-- Your app title -->
+    <title>KickUser</title>
+    <!-- Path to Framework7 Library CSS -->
+    <link rel="stylesheet" href="css/libs/framework7.min.css">
+    <link rel="stylesheet" href="css/libs/framework7-icons.css">
+    <!-- Path to your custom app styles-->
+</head>
+
+<body>
+    <!-- App Root Element -->
+    <div id="app">
+
+        <!-- Status bar overlay for full screen mode (Cordova or PhoneGap) -->
+        <f7-statusbar></f7-statusbar>
+
+        <!-- Main view-->
+        <f7-view main>
+
+            <f7-page>
+
+
+
+                <div class="page-content ptr-content">
+                    <div class="ptr-preloader">
+                        <div class="preloader"></div>
+                        <div class="ptr-arrow"></div>
+                    </div>
+                    <div class="list media-list">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-media">
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Yellow Submarine</div>
+                                    </div>
+                                    <div class="item-subtitle">Beatles</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media">
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Don't Stop Me Now</div>
+                                    </div>
+                                    <div class="item-subtitle">Queen</div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-media">
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title-row">
+                                        <div class="item-title">Billie Jean</div>
+                                    </div>
+                                    <div class="item-subtitle">Michael Jackson</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+
+            </f7-page>
+
+        </f7-view>
+
+    </div>
+    <!-- /#app -->
+
+    <!-- Path to Vue js -->
+    <script type="text/javascript" src="js/libs/vue.js"></script>
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="js/libs/framework7.min.js"></script>
+    <!-- Path to Framework7 Vue Plugin -->
+    <script type="text/javascript" src="js/libs/framework7-vue.min.js"></script>
+
+    <!-- Path to your app js where you init your app-->
+    <script>
+
+        var app = new Framework7();
+
+        var $$ = Dom7;
+
+        // Dummy Content
+        var songs = ['Yellow Submarine', 'Don\'t Stop Me Now', 'Billie Jean', 'Californication'];
+        var authors = ['Beatles', 'Queen', 'Michael Jackson', 'Red Hot Chili Peppers'];
+        // Pull to refresh content
+        var $ptrContent = $$('.ptr-content');
+        // Add 'refresh' listener on it
+        $ptrContent.on('ptr:refresh', function (e) {
+            // Emulate 2s loading
+            setTimeout(function () {
+                var picURL = Math.round(Math.random() * 10);
+                var song = songs[Math.floor(Math.random() * songs.length)];
+                var author = authors[Math.floor(Math.random() * authors.length)];
+                var itemHTML =
+                    '<li class="item-content">' +
+                    '<div class="item-media"><img src="' + picURL + '" width="44"/></div>' +
+                    '<div class="item-inner">' +
+                    '<div class="item-title-row">' +
+                    '<div class="item-title">' + song + '</div>' +
+                    '</div>' +
+                    '<div class="item-subtitle">' + author + '</div>' +
+                    '</div>' +
+                    '</li>';
+                // Prepend new list element
+                $ptrContent.find('ul').prepend(itemHTML);
+                // When loading done, we need to reset it
+                app.ptr.done(); // or e.detail();
+            }, 2000);
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>
+
+
+var $$ = Dom7;
+var $ptrContent = $$('.ptr-content');
+console.log($ptrContent);
+$ptrContent.on('ptr:refresh', function (e) {
+
+
+  console.log('test');
+
+  // When loading done, we need to reset it
+  app.ptr.done(); // or e.detail();
+});
